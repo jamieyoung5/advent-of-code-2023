@@ -2,11 +2,13 @@ use crate::input_reader::read_input_file;
 use crate::d1::{day1part1, day1part2};
 use crate::d2::{day2part1, day2part2};
 use crate::d3::{day3part1, day3part2};
+use crate::d4::{day4part1, day4part2};
 
 mod d1;
 mod input_reader;
 mod d2;
 mod d3;
+mod d4;
 
 fn main() {
     let d1_inputs = read_input_file("/home/jamie/git/advent-of-code-2023/inputs/d1.txt");
@@ -22,8 +24,14 @@ fn main() {
     let d3_inputs = read_input_file("/home/jamie/git/advent-of-code-2023/inputs/d3.txt");
     let d3p1 = day3part1(d3_inputs.clone());
     let d3p2 = day3part2(d3_inputs);
-
     println!("DAY 3 PART 1: {0}, PART 2: {1}", d3p1, d3p2);
+
+
+    let d4_inputs = read_input_file("/home/jamie/git/advent-of-code-2023/inputs/d4.txt");
+    let d4p1 = day4part1(d4_inputs.clone());
+    let d4p2 = day4part2(d4_inputs);
+    println!("DAY 4 PART1: {0}, PART2: {1}", d4p1, d4p2);
+
 }
 
 
