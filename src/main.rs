@@ -35,7 +35,7 @@ fn main() {
     let d4p2 = day4part2(d4_inputs);
     println!("DAY 4 PART 1: {0}, PART 2: {1}", d4p1, d4p2);*/
 
-    let d5_input = read_input_file_raw("/home/jamie/git/advent-of-code-2023/inputs/d5.txt");
+    let d5_input = read_input_file_raw("/home/jamie/git/advent-of-code-2023/inputs/test.txt");
     let d5p1 = 0; //day5part1(d5_input.clone());
     let d5p2 = day5part2(d5_input);
     println!("DAY 5 PART 1: {0}, PART 2: {1}", d5p1, d5p2);
