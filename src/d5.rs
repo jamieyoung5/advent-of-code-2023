@@ -10,45 +10,48 @@ pub fn day5part1(input: String) -> u64 {
     let mut lowest_location = u64::MAX;
 
     for seed in seed_list {
-        lowest_location = calculate_seed_lowest_location(seed, &conversion_maps, lowest_location);
-    }
-
-    lowest_location
-}
-
-pub fn day5part2(input: String) -> u64 {
-    let (seed_list, conversion_maps) = parse_input(input);
-    let seeds: Vec<_> = seed_list
-        .chunks(2)
-        .map(|chunk| (chunk[0], chunk.get(1).cloned().unwrap_or_default()))
-        .collect();
-
-    let mut lowest_location = u64::MAX;
-    for seed_range in seeds {
-        for seed in seed_range.0..=(seed_range.0+seed_range.1) {
-            lowest_location = calculate_seed_lowest_location(seed, &conversion_maps, lowest_location);
+        let location = calculate_seed_lowest_location(seed, &conversion_maps);
+        if location < lowest_location {
+            lowest_location = location;
         }
     }
 
     lowest_location
 }
 
-fn calculate_seed_lowest_location(seed: u64, conversion_maps:  &Vec<Vec<ConversionData>>, lowest_location: u64) -> u64 {
-    let mut location: u64 = seed;
-    for conversion in conversion_maps {
-        location = map_value(location, conversion);
+
+pub fn day5part2(input: String) -> u64 {
+    let (seed_list, conversion_maps) = parse_input(input);
+    let mut lowest_location = u64::MAX;
+
+    for i in 0..seed_list.len() / 2 {
+        let start = seed_list[i * 2];
+        let length = seed_list[i * 2 + 1];
+        for seed in start..start + length {
+            let location = calculate_seed_lowest_location(seed, &conversion_maps);
+            if location < lowest_location {
+                lowest_location = location;
+            }
+        }
     }
 
-    lowest_location.min(location)
+    lowest_location
+}
+
+fn calculate_seed_lowest_location(seed: u64, conversion_maps: &Vec<Vec<ConversionData>>) -> u64 {
+    let mut location = seed;
+    for conversion_map in conversion_maps {
+        location = map_value(location, conversion_map);
+    }
+    location
 }
 
 fn map_value(value: u64, mappings: &Vec<ConversionData>) -> u64 {
     for map in mappings {
         if value >= map.source_start && value < map.source_start + map.range_length {
-            return map.destination_start + ( value - map.source_start );
+            return map.destination_start + (value - map.source_start);
         }
     }
-
     value
 }
 
