@@ -1,3 +1,5 @@
+use crate::util::{big_digits_to_list, digits_to_list};
+
 #[derive(Debug)]
 struct ConversionData {
     destination_start: u64,
@@ -19,7 +21,10 @@ pub fn day5part1(input: String) -> u64 {
     lowest_location
 }
 
-
+/*
+30 minutes to run vs 2 hours trying to optimize
+i think ill take the former
+ */
 pub fn day5part2(input: String) -> u64 {
     let (seed_list, conversion_maps) = parse_input(input);
     let mut lowest_location = u64::MAX;
@@ -72,7 +77,7 @@ fn parse_input(input: String) -> (Vec<u64>, Vec<Vec<ConversionData>>) {
 fn parse_input_conversion_map(input: &str) -> Vec<ConversionData> {
     let mut conversion_map_list: Vec<ConversionData> = Vec::new();
     for line in input.lines().skip(1) {
-        let map_data = digits_to_list(line);
+        let map_data = big_digits_to_list(line);
         let conversion_data = ConversionData {
             destination_start: map_data[0],
             source_start: map_data[1],
@@ -88,12 +93,5 @@ fn parse_input_conversion_map(input: &str) -> Vec<ConversionData> {
 fn parse_input_to_seed_list(seed_list: &str) -> Vec<u64> {
     let parts: Vec<&str> = seed_list.split(":").collect();
 
-    digits_to_list(parts[1])
-}
-
-fn digits_to_list(digits: &str) -> Vec<u64> {
-    digits
-        .split_whitespace()
-        .filter_map(|num| num.parse().ok())
-        .collect()
+    big_digits_to_list(parts[1])
 }
