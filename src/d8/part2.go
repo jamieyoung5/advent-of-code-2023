@@ -1,7 +1,6 @@
 package d8
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -23,8 +22,6 @@ func Part2(inputs []string) int {
 		allSteps = append(allSteps, <-resultsCh)
 	}
 	close(resultsCh)
-
-	fmt.Println(allSteps)
 
 	steps = allSteps[0]
 	for _, step := range allSteps[1:] {

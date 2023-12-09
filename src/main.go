@@ -2,22 +2,24 @@ package main
 
 import (
 	"advent-of-code-2023/src/d8"
+	"advent-of-code-2023/src/d9"
 	"bufio"
 	"fmt"
 	"os"
 )
 
 func main() {
+	challengeResult := "Day %d Part 1: %d, Part 2: %d\n"
 
-	day8Input, err := readFileLines("inputs/d8.txt")
-	if err != nil {
-		fmt.Println("Error reading file:", err)
-		return
-	}
-
+	day8Input, _ := readFileLines("inputs/d8.txt")
 	day8Part1 := d8.Part1(day8Input)
 	day8Part2 := d8.Part2(day8Input)
-	fmt.Printf("Day 8 Part 1: %d, Part 2: %d", day8Part1, day8Part2)
+	fmt.Printf(challengeResult, 8, day8Part1, day8Part2)
+
+	day9Input, _ := readFileLines("inputs/d9.txt")
+	day9Part1 := d9.Part1(day9Input)
+	day9Part2 := d9.Part2(day9Input)
+	fmt.Printf(challengeResult, 9, day9Part1, day9Part2)
 }
 
 func readFileLines(filename string) ([]string, error) {
